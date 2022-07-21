@@ -44,7 +44,7 @@ packages:
   - software-properties-common
   - ansible
 runcmd:
-  - git clone https://github.com/Crush-Steelpunch/Minikube-Aws-Env.git ~ubuntu/
+  - git clone https://github.com/Crush-Steelpunch/Minikube-Aws-Env.git /tmp/Minikube-Aws-Env
 
 EOF
 

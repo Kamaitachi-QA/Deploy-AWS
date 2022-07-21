@@ -32,3 +32,7 @@
       update_cache: yes
 
    - name: add user to group
+     user:
+       name: ubuntu
+       append: true
+       groups: docker

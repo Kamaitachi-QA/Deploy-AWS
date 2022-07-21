@@ -24,3 +24,11 @@ minikube start
 minikube kubectl -- get po -A
 alias kubectl="minikube kubectl --"
 ```
+
+## Notes
+
+### Loadbalancer service types
+
+```bash
+minikube tunnel
+```

@@ -11,12 +11,12 @@ variable "name-prefix" {
 }
 
 variable "sshkeypairname" {
-  type = string
+  type        = string
   description = "ssh keypair name in aws"
 }
 
 variable "securitygrouplist" {
-  type = list
+  type        = list(any)
   description = "security group for instances"
 }
 
@@ -24,18 +24,46 @@ variable "securitygrouplist" {
 // Local Variables
 
 locals {
-  imageid = "ami-0bd2099338bc55e6d"  
+  imageid      = "ami-0bd2099338bc55e6d"
   instanceType = "t3.small"
+}
+
+
+resource "aws_security_group" "minikube" {
+  name = "minikube"
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  ingress {
+    description = "SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    description = "Services"
+    from_port   = 8000
+    to_port     = 65535
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 
 
 resource "aws_instance" "kubernetes" {
-  ami           = local.imageid
-  instance_type = local.instanceType
-  key_name = var.sshkeypairname
-  vpc_security_group_ids= var.securitygrouplist
-  user_data = <<EOF
+  ami                    = local.imageid
+  instance_type          = local.instanceType
+  key_name               = var.sshkeypairname
+  vpc_security_group_ids = [aws_security_group.minikube.id]
+  user_data              = <<EOF
 #cloud-config
 sources:
   ansible:

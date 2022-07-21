@@ -36,8 +36,8 @@ minikube tunnel
 ```bash
 export KUBE_PORT=<portnum>
 export KUBE_IP=<portid>
-ssh -i <key> user@<ext-ip> -L ${KUBE_PORT}:${KUBE_IP}:${KUBE_PORT}
+ssh -i <key> user@<ext-ip> -L 9000:${KUBE_IP}:${KUBE_PORT}
 
 ```
 
-Point browser to `127.0.0.1:${KUBE_PORT}`
+Point browser to `127.0.0.1:9000`

@@ -15,10 +15,6 @@ variable "sshkeypairname" {
   description = "ssh keypair name in aws"
 }
 
-variable "securitygrouplist" {
-  type        = list(any)
-  description = "security group for instances"
-}
 
 
 // Local Variables

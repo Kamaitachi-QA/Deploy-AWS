@@ -72,6 +72,9 @@ runcmd:
 
 EOF
 
+  root_block_device {
+    volume_size = 20
+  }
   tags = {
     Name = "${var.name-prefix}-minikube"
   }

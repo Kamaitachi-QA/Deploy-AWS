@@ -55,7 +55,7 @@ resource "aws_security_group" "SecGroup" {
 
 
 
-resource "aws_instance" "PetClinic" {
+resource "aws_instance" "PetClinic-FE" {
   ami                    = local.imageid
   instance_type          = local.instanceType
   key_name               = var.sshkeypairname
@@ -77,12 +77,12 @@ EOF
     volume_size = 20
   }
   tags = {
-    Name = "${var.name-prefix}--FrontEnd-Server"
+    Name = "${var.name-prefix}-FrontEnd-Server"
   }
 }
 
 
-resource "aws_instance" "PetClinic" {
+resource "aws_instance" "PetClinic-BE" {
   ami                    = local.imageid
   instance_type          = local.instanceType
   key_name               = var.sshkeypairname

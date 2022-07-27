@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 // Input Variables
-
+# Taken from Leon Robinson, modified for our own use.
 variable "name-prefix" {
   type        = string
   default     = "terraform"
@@ -25,8 +25,8 @@ locals {
 }
 
 
-resource "aws_security_group" "minikube" {
-  name = "minikube"
+resource "aws_security_group" "SecGroup" {
+  name = "SecGroup"
 
   egress {
     from_port        = 0
@@ -54,11 +54,11 @@ resource "aws_security_group" "minikube" {
 
 
 
-resource "aws_instance" "kubernetes" {
+resource "aws_instance" "PetClinic" {
   ami                    = local.imageid
   instance_type          = local.instanceType
   key_name               = var.sshkeypairname
-  vpc_security_group_ids = [aws_security_group.minikube.id]
+  vpc_security_group_ids = [aws_security_group.Secgroup.id]
   user_data              = <<EOF
 #cloud-config
 sources:
@@ -68,7 +68,7 @@ packages:
   - software-properties-common
   - ansible
 runcmd:
-  - git clone https://github.com/Crush-Steelpunch/Minikube-Aws-Env.git /tmp/Minikube-Aws-Env
+  - git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
 
 EOF
 
@@ -76,12 +76,12 @@ EOF
     volume_size = 20
   }
   tags = {
-    Name = "${var.name-prefix}-minikube"
+    Name = "${var.name-prefix}-deploymentvolume"
   }
 }
 
 
 
 output "amazon_pubip" {
-  value = aws_instance.kubernetes.public_ip
+  value = aws_instance.PetClinic.public_ip
 }

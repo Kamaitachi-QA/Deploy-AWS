@@ -4,6 +4,7 @@ provider "aws" {
 
 // Input Variables
 # Taken from Leon Robinson, modified for our own use.
+
 variable "name-prefix" {
   type        = string
   default     = "PetClinic"

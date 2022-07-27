@@ -6,7 +6,7 @@ provider "aws" {
 # Taken from Leon Robinson, modified for our own use.
 variable "name-prefix" {
   type        = string
-  default     = "terraform"
+  default     = "PetClinic"
   description = "prefix for instance name"
 }
 
@@ -76,7 +76,7 @@ EOF
     volume_size = 20
   }
   tags = {
-    Name = "${var.name-prefix}-deploymentvolume"
+    Name = "${var.name-prefix}-Server"
   }
 }
 

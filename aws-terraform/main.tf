@@ -109,6 +109,9 @@ EOF
 }
 
 
-output "amazon_pubip" {
-  value = aws_instance.PetClinic.public_ip
+output "amazon_pubip-frontend" {
+  value = aws_instance.PetClinic-FE.public_ip
+}
+output "amazon_pubip-backend" {
+  value = aws_instance.PetClinic-BE.public_ip
 }

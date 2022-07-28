@@ -47,7 +47,14 @@ resource "aws_security_group" "SecGroup" {
   ingress {
     description = "Services"
     from_port   = 8000
-    to_port     = 65535
+    to_port     = 8010
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+    ingress {
+    description = "Petclinic8080"
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -70,6 +77,8 @@ packages:
   - ansible
 runcmd:
   - git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
+  - git clone https://github.com/spring-petclinic/spring-petclinic-angular
+  - docker build -t spring-petclinic-angular:latest .
 
 EOF
 
@@ -97,6 +106,8 @@ packages:
   - ansible
 runcmd:
   - git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
+  - git clone https://github.com/spring-petclinic/spring-petclinic-rest
+  - docker run -p 9966:9966 springcommunity/spring-petclinic-rest
 
 EOF
 

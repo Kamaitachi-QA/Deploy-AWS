@@ -112,9 +112,10 @@ runcmd:
   - git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
   - git clone https://github.com/spring-petclinic/spring-petclinic-rest /tmp/spring-backend
   - cd /tmp/Deploy-Aws/ansible-playbook
+  - git checkout Asad-dev
   - sudo apt install ansible
   - ansible-playbook dockerinstall.yaml
-  - cd /tmp/spring-backend
+  - cd ~/tmp/spring-backend
   - sudo docker run -p 9966:9966 springcommunity/spring-petclinic-rest
 
 EOF

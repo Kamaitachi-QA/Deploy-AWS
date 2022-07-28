@@ -103,7 +103,7 @@ sources:
     source "ppa:ansible/ansible"
 packages:
   - software-properties-common
-  - ansible
+  - ansiblegit 
 runcmd:
   - git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
   - git clone https://github.com/spring-petclinic/spring-petclinic-rest

@@ -77,8 +77,12 @@ packages:
   - ansible
 runcmd:
   - git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
-  - git clone https://github.com/spring-petclinic/spring-petclinic-angular
-  - docker build -t spring-petclinic-angular:latest .
+  - git clone https://github.com/spring-petclinic/spring-petclinic-angular /tmp/spring-frontend
+  - cd /tmp/Deploy-Aws/ansible-playbook
+  - ansible-playbook dockerinstall.yaml
+  - cd ~
+  - cd /tmp/spring-frontend
+  - sudo docker build -t spring-petclinic-angular:latest .
 
 EOF
 
@@ -106,8 +110,11 @@ packages:
   - ansiblegit 
 runcmd:
   - git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
-  - git clone https://github.com/spring-petclinic/spring-petclinic-rest
-  - docker run -p 9966:9966 springcommunity/spring-petclinic-rest
+  - git clone https://github.com/spring-petclinic/spring-petclinic-rest /tmp/spring-backend
+  - cd /tmp/Deploy-Aws/ansible-playbook
+  - ansible-playbook dockerinstall.yaml
+  - cd /tmp/spring-backend
+  - sudo docker run -p 9966:9966 springcommunity/spring-petclinic-rest
 
 EOF
 

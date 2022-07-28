@@ -61,7 +61,7 @@ resource "aws_security_group" "SecGroup" {
 }
 
 
-
+/**
 resource "aws_instance" "PetClinic-FE" {
   ami                    = local.imageid
   instance_type          = local.instanceType
@@ -93,7 +93,7 @@ EOF
     Name = "${var.name-prefix}-FrontEnd-Server"
   }
 }
-
+*/
 
 resource "aws_instance" "PetClinic-BE" {
   ami                    = local.imageid
@@ -112,6 +112,7 @@ runcmd:
   - git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
   - git clone https://github.com/spring-petclinic/spring-petclinic-rest /tmp/spring-backend
   - cd /tmp/Deploy-Aws/ansible-playbook
+  - sudo apt install ansible
   - ansible-playbook dockerinstall.yaml
   - cd /tmp/spring-backend
   - sudo docker run -p 9966:9966 springcommunity/spring-petclinic-rest
@@ -130,6 +131,7 @@ EOF
 output "amazon_pubip-frontend" {
   value = aws_instance.PetClinic-FE.public_ip
 }
+/**
 output "amazon_pubip-backend" {
   value = aws_instance.PetClinic-BE.public_ip
-}
+}*/

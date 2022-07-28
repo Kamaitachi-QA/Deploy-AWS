@@ -111,8 +111,9 @@ packages:
 runcmd:
   - git clone -b Asad-dev https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
   - git clone https://github.com/spring-petclinic/spring-petclinic-rest /tmp/spring-backend
-  - cd /tmp/Deploy-Aws/ansible-playbook
-  - sudo apt install ansible
+  - cd /tmp/Deploy-Aws/ansible-playbook/
+  - sudo apt install ansible -y
+  #sudo install lines arn't currently wokring!!
   - ansible-playbook dockerinstall.yaml
   - cd ~/tmp/spring-backend
   - sudo docker run -p 9966:9966 springcommunity/spring-petclinic-rest

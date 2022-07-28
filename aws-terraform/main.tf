@@ -75,7 +75,8 @@ runcmd:
   - cd /tmp/Deploy-AWS/ansible-playbook
   - ansible-playbook dockerinstall.yaml
   - cd /tmp/back-end
-  - docker run -p 9966:9966 springcommunity/spring-petclinic-rest
+  - sudo chmod 666 /var/run/docker.sock
+  - docker run -d -p 9966:9966 springcommunity/spring-petclinic-rest
   - cd /tmp/front-end
   - docker build -t spring-petclinic-angular:latest .
   - docker run --rm -p 8080:8080 spring-petclinic-angular:latest

@@ -70,6 +70,15 @@ packages:
   - ansible
 runcmd:
   - git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
+  - git clone https://github.com/Kamaitachi-QA/back-end.git /tmp/back-end
+  - git clone https://github.com/Kamaitachi-QA/front-end.git /tmp/front-end
+  - cd /tmp/Deploy-AWS/ansible-playbook
+  - ansible-playbook dockerinstall.yaml
+  - cd /tmp/back-end
+  - docker run -p 9966:9966 springcommunity/spring-petclinic-rest
+  - cd /tmp/front-end
+  - docker build -t spring-petclinic-angular:latest .
+  - docker run --rm -p 8080:8080 spring-petclinic-angular:latest
 
 EOF
 
@@ -82,36 +91,6 @@ EOF
 }
 
 
-resource "aws_instance" "PetClinic-BE" {
-  ami                    = local.imageid
-  instance_type          = local.instanceType
-  key_name               = var.sshkeypairname
-  vpc_security_group_ids = [aws_security_group.SecGroup.id]
-  user_data              = <<EOF
-#cloud-config
-sources:
-  ansible:
-    source "ppa:ansible/ansible"
-packages:
-  - software-properties-common
-  - ansible
-runcmd:
-  - git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
-
-EOF
-
-  root_block_device {
-    volume_size = 20
-  }
-  tags = {
-    Name = "${var.name-prefix}-BackEnd-Server"
-  }
-}
-
-
 output "amazon_pubip-frontend" {
   value = aws_instance.PetClinic-FE.public_ip
-}
-output "amazon_pubip-backend" {
-  value = aws_instance.PetClinic-BE.public_ip
 }

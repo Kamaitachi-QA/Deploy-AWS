@@ -22,7 +22,7 @@ variable "sshkeypairname" {
 
 locals {
   imageid      = "ami-0bd2099338bc55e6d"
-  instanceType = "t3.small"
+  instanceType = "t3.medium"
 }
 
 
@@ -45,9 +45,9 @@ resource "aws_security_group" "SecGroup" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    description = "Services"
-    from_port   = 8000
-    to_port     = 65535
+    description = "Port-8080"
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }

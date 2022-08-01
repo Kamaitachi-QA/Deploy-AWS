@@ -7,10 +7,12 @@ pipeline {
        stages{
         stage ('manage configuration & deploy'){
             steps{
-                cd "/aws-terraform/"
-                sh "terraform init"
-                sh "terraform plan"
-                sh "terraform apply --auto-approve"
+                sh ''' #!/bin/bash/
+                cd /aws-terraform/
+                terraform init
+                terraform plan
+                terraform apply --auto-approve
+                '''
             }
         }
     }

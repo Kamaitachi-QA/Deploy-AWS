@@ -9,7 +9,7 @@ pipeline {
             steps{
                 sh "/aws-terraform/terraform init"
                 sh "/aws-terraform/terraform plan"
-                sh "/aws-terraform/terraform apply --auto-approve"
+                sh "/aws-terraform/terraform apply --auto-approve" 
             }
         }
     }

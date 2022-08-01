@@ -8,7 +8,6 @@ pipeline {
         stage ('manage configuration & deploy'){
             steps{
                 sh ''' #!/bin/bash/
-                git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git
                 cd Deploy-AWS/aws-terraform
                 terraform init
                 terraform plan

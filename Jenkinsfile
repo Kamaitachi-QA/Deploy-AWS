@@ -9,7 +9,7 @@ pipeline {
             steps{
                 sh ''' #!/bin/bash/
                 git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git
-                cd /aws-terraform
+                cd Deploy-AWS/aws-terraform
                 terraform init
                 terraform plan
                 terraform apply --auto-approve

@@ -26,8 +26,8 @@ locals {
 }
 
 
-resource "aws_security_group" "SecGroup" {
-  name = "SecGroup"
+resource "aws_security_group" "SGroup" {
+  name = "SGroup"
 
   egress {
     from_port        = 0
@@ -59,7 +59,7 @@ resource "aws_instance" "PetClinic-FE" {
   ami                    = local.imageid
   instance_type          = local.instanceType
   key_name               = var.sshkeypairname
-  vpc_security_group_ids = [aws_security_group.SecGroup.id]
+  vpc_security_group_ids = [aws_security_group.SGroup.id]
   user_data              = <<EOF
 #cloud-config
 sources:
@@ -86,7 +86,7 @@ resource "aws_instance" "PetClinic-BE" {
   ami                    = local.imageid
   instance_type          = local.instanceType
   key_name               = var.sshkeypairname
-  vpc_security_group_ids = [aws_security_group.SecGroup.id]
+  vpc_security_group_ids = [aws_security_group.SGroup.id]
   user_data              = <<EOF
 #cloud-config
 sources:

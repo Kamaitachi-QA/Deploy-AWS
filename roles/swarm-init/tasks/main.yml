@@ -1,17 +1,17 @@
 ---
 # tasks file for swarm
 - name: Check if Swarm has already been Initialized
+  become: true 
   shell: docker node ls
   register: swarm_status
   ignore_errors: true
   tags: swarm
   
 - name: Initialize Docker Swarm
+  become: true
   docker_swarm:
     state: present
-    default_addr_poll: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}" 
   when: swarm_status.rc != 0
-  run_once: true
   tags: swarm
 
 - name: Get the Manager join-token

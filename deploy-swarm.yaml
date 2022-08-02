@@ -9,7 +9,6 @@
   hosts: swarm-manager
   roles:
     - swarm-init
-    - add-manager
 
 - name: add workers to the swarm
   become: true

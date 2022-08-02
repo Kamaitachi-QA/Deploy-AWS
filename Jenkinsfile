@@ -8,6 +8,7 @@ pipeline {
         stage ('manage configuration & deploy'){
             steps{
                 sh ''' #!/bin/bash/
+                git pull origin main
                 cd Deploy-AWS/aws-terraform
                 terraform init
                 terraform plan

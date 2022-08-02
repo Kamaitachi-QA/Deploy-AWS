@@ -44,6 +44,15 @@ resource "aws_security_group" "SecGroup" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+ingress {
+    description = "port-2377"
+    from_port   = 2377
+    to_port     = 2377
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+}
+
   ingress {
     description = "Port-8080"
     from_port   = 8080
@@ -55,7 +64,7 @@ resource "aws_security_group" "SecGroup" {
 
 
 
-resource "aws_instance" "PetClinic-FE" {
+resource "aws_instance" "Manager" {
   ami                    = local.imageid
   instance_type          = local.instanceType
   key_name               = var.sshkeypairname
@@ -74,8 +83,8 @@ runcmd:
   - git clone https://github.com/Kamaitachi-QA/front-end.git /tmp/front-end
   - cd /tmp/Deploy-AWS/ansible-playbook
   - ansible-playbook dockerinstall.yaml
-  - cd /tmp/back-end
   - sudo chmod 666 /var/run/docker.sock
+  - cd /tmp/back-end
   - docker run -d -p 9966:9966 springcommunity/spring-petclinic-rest
   - cd /tmp/front-end
   - docker build -t spring-petclinic-angular:latest .
@@ -83,15 +92,79 @@ runcmd:
 
 EOF
 
+
   root_block_device {
     volume_size = 20
   }
   tags = {
-    Name = "${var.name-prefix}-FrontEnd-Server"
+    Name = "${var.name-prefix}-Manager"
   }
 }
 
+resource "aws_instance" "worker1" {
+  ami                    = local.imageid
+  instance_type          = local.instanceType
+  key_name               = var.sshkeypairname
+  vpc_security_group_ids = [aws_security_group.SecGroup.id]
+  user_data              = <<EOF
+#cloud-config
+sources:
+  ansible:
+    source "ppa:ansible/ansible"
+packages:
+  - software-properties-common
+  - ansible
+runcmd:
+  - git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
+  - cd /tmp/Deploy-AWS/ansible-playbook
+  - ansible-playbook dockerinstall.yaml
+  # - sudo chmod 666 /var/run/docker.sock
+EOF
 
-output "amazon_pubip-frontend" {
-  value = aws_instance.PetClinic-FE.public_ip
+  root_block_device {
+    volume_size = 20
+  }
+  tags = {
+    Name = "${var.name-prefix}-Worker1"
+  }
+}
+
+resource "aws_instance" "worker2" {
+  ami                    = local.imageid
+  instance_type          = local.instanceType
+  key_name               = var.sshkeypairname
+  vpc_security_group_ids = [aws_security_group.SecGroup.id]
+  user_data              = <<EOF
+#cloud-config
+sources:
+  ansible:
+    source "ppa:ansible/ansible"
+packages:
+  - software-properties-common
+  - ansible
+runcmd:
+  - git clone https://github.com/Kamaitachi-QA/Deploy-AWS.git /tmp/Deploy-AWS
+  - cd /tmp/Deploy-AWS/ansible-playbook
+  - ansible-playbook dockerinstall.yaml
+  #- sudo chmod 666 /var/run/docker.sock
+EOF
+
+  root_block_device {
+    volume_size = 20
+  }
+  tags = {
+    Name = "${var.name-prefix}-Worker2"
+  }
+}
+
+output "amazon_pubip-Manager" {
+  value = aws_instance.Manager.public_ip
+}
+
+output "amazon_pubip-worker1" {
+  value = aws_instance.worker1.public_ip
+}
+
+output "amazon_pubip-Worker2" {
+  value = aws_instance.worker2.public_ip
 }

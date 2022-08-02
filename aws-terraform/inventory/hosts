@@ -1,0 +1,14 @@
+[manager]
+18.134.155.217
+
+[workers]
+3.9.189.65
+18.170.115.51
+
+[workers:vars]
+ansible_ssh_private_key_file=/home/jhenry/.ssh/jazz-key-pair.pem
+ansible_user=ubuntu
+
+[manager:vars]
+ansible_ssh_private_key_file=/home/jhenry/.ssh/jazz-key-pair.pem
+ansible_user=ubuntu

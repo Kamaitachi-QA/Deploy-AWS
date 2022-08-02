@@ -8,7 +8,7 @@ pipeline {
         stage ('manage configuration & deploy'){
             steps{
                 sh ''' #!/bin/bash/
-                cd Deploy-AWS/aws-terraform
+                cd aws-terraform
                 terraform init
                 terraform plan
                 terraform apply --auto-approve

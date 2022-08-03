@@ -18,6 +18,7 @@ pipeline {
           stage ('ansible playbook - swarm deploy'){
               steps{
                   sh ''' #!/bin/bash/
+                  cd aws-terraform
                   ansible-playbook -i inventory playbook-swarm.yaml --auto-approve
                   '''
               }

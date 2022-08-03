@@ -1,1 +1,1 @@
-sshkeypairname    = "Asad AWS Key"
+sshkeypairname    = "AsadAWSKey"

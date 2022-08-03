@@ -7,7 +7,7 @@ provider "aws" {
 
 variable "name-prefix" {
   type        = string
-  default     = "PetClinic"
+  default     = "PetClinic-"
   description = "prefix for instance name"
 }
 
@@ -62,7 +62,7 @@ resource "aws_security_group" "SecGroup" {
 
 
 /**
-resource "aws_instance" "PetClinic-FE" {
+resource "aws_instance" "FE" {
   ami                    = local.imageid
   instance_type          = local.instanceType
   key_name               = var.sshkeypairname
@@ -95,7 +95,7 @@ EOF
 }
 */
 
-resource "aws_instance" "PetClinic-BE" {
+resource "aws_instance" "BE" {
   ami                    = local.imageid
   instance_type          = local.instanceType
   key_name               = var.sshkeypairname
@@ -130,9 +130,14 @@ EOF
 
 /**
 output "amazon_pubip-frontend" {
-  value = aws_instance.PetClinic-FE.public_ip
+  value = aws_instance.FE.public_ip
 }
 */
 output "amazon_pubip-backend" {
-  value = aws_instance.PetClinic-BE.public_ip
+  value = aws_instance.BE.public_ip
+}
+
+resource "local_file" "example_terra_output" {
+    content  = "Managers IP: \n something:${aws_instance.BE.public_ip}"
+    filename = "${path.module}/Documents/QA/example_terra_output.txt"
 }

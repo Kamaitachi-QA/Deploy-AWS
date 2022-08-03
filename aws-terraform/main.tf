@@ -138,6 +138,6 @@ output "amazon_pubip-backend" {
 }
 
 resource "local_file" "example_terra_output" {
-    content  = "Managers IP: \n something:${aws_instance.BE.public_ip}"
+    content  = "Managers IP: \n${aws_instance.BE.public_ip} \n \n Workers Ip: \n "
     filename = "${path.module}/../example_terra_output.txt"
 }

@@ -1,1 +1,1 @@
-sshkeypairname    = "Jazz-key-pair"
+sshkeypairname    = "lukesAWSkeypair"

@@ -21,6 +21,7 @@ pipeline {
                   cd aws-terraform
                   ansible-playbook -i inventory playbook-swarm.yaml --auto-approve
                   sleep 30
+                  terraform destroy
                   '''
               }
           }

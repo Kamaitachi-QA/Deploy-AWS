@@ -5,7 +5,15 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key_id')
         ANSIBLE_HOST_KEY_CHECKING='False'
     }
+    
+    
        stages{
+             stage ('Destroy v1'){
+              steps{
+                  sh ''' #!/bin/bash/
+                  terraform destroy --auto-approve
+                  '''
+              }
         stage ('manage configuration & deploy'){
             steps{
                 sh ''' #!/bin/bash/
@@ -19,7 +27,7 @@ pipeline {
           stage ('night night'){
               steps{
                   sh ''' #!/bin/bash/
-                  sleep 60
+                  sleep 45
                   '''
               }
           }

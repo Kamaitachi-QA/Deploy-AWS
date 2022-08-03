@@ -26,7 +26,7 @@ locals {
 }
 
  resource "local_file" "hosts" {
-    content = "[manager] \n${aws_instance.Manager.public_ip} \n[workers] \n${aws_instance.worker1.public_ip} \n${aws_instance.worker2.public_ip} \n[workers:vars] \nansible_ssh_private_key_file=/lukesAWSkeypair.pem \nansible_user=ubuntu \n[manager:vars] \nansible_ssh_private_key_file=/lukesAWSkeypair.pem \nansible_user=ubuntu" 
+    content = "[manager] \n${aws_instance.Manager.public_ip} \n[workers] \n${aws_instance.worker1.public_ip} \n${aws_instance.worker2.public_ip} \n[workers:vars] \nansible_ssh_private_key_file=/home/lukeb/Deploy-AWS/lukesAWSkeypair.pem \nansible_user=ubuntu \n[manager:vars] \nansible_ssh_private_key_file=/home/lukeb/Deploy-AWS/lukesAWSkeypair.pem \nansible_user=ubuntu" 
 
  
 #   template = "${file("${path.module}/hosts.tpl")}"

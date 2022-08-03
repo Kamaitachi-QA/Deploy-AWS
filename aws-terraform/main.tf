@@ -25,6 +25,18 @@ locals {
   instanceType = "t3.medium"
 }
 
+ resource "local_file" "hosts" {
+    content = "[manager] \n${aws_instance.Manager.public_ip} \n[workers] \n${aws_instance.worker1.public_ip} \n${aws_instance.worker2.public_ip} \n[workers:vars] \nansible_ssh_private_key_file=/home/jhenry/.ssh/jazz-key-pair.pem \nansible_user=ubuntu \n[manager:vars] \nansible_ssh_private_key_file=/home/jhenry/.ssh/jazz-key-pair.pem \nansible_user=ubuntu" 
+
+ 
+#   template = "${file("${path.module}/hosts.tpl")}"
+#   vars = {
+#       manager = aws_instance.Manager.public_ip
+#       worker1 = aws_instance.worker1.public_ip
+#       worker2 = aws_instance.worker2.public_ip
+    
+  filename = "${path.module}/inventory/hosts"
+ }
 
 resource "aws_security_group" "SecGroup" {
   name = "SecGroup"
@@ -158,13 +170,16 @@ EOF
 }
 
 output "amazon_pubip-Manager" {
+  description = "manager"
   value = aws_instance.Manager.public_ip
 }
 
 output "amazon_pubip-worker1" {
+  description = "workers"
   value = aws_instance.worker1.public_ip
 }
 
 output "amazon_pubip-Worker2" {
+  description = "workers"
   value = aws_instance.worker2.public_ip
 }

@@ -1,1 +1,1 @@
-sshkeypairname    = "lukesAWSkeypair"
+sshkeypairname = "lukesAWSkeypair"

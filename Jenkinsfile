@@ -20,6 +20,12 @@ pipeline {
                   sh ''' #!/bin/bash/
                   cd aws-terraform
                   ansible-playbook -i inventory playbook-swarm.yaml
+                  '''
+              }
+          }
+           stage ('Destroying it all!'){
+              steps{
+                  sh ''' #!/bin/bash/
                   sleep 30
                   terraform destroy
                   '''

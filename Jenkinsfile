@@ -11,10 +11,12 @@ pipeline {
              stage ('Destroy v1'){
               steps{
                   sh ''' #!/bin/bash/
+                  cd aws-terraform
                   terraform destroy --auto-approve
                   '''
               }
              }
+           
         stage ('manage configuration & deploy'){
             steps{
                 sh ''' #!/bin/bash/
@@ -32,6 +34,7 @@ pipeline {
                   '''
               }
           }
+           
           stage ('ansible playbook - swarm deploy'){
               steps{
                   sh ''' #!/bin/bash/
@@ -43,6 +46,7 @@ pipeline {
                   }
               }
           }
+           
            stage ('Destroying it all!'){
               steps{
                   sh ''' #!/bin/bash/

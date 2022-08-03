@@ -29,12 +29,14 @@ pipeline {
                   cd aws-terraform
                   ansible-playbook -i inventory playbook-swarm.yaml
                   '''
+                  catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh "exit 1"
               }
           }
            stage ('Destroying it all!'){
               steps{
                   sh ''' #!/bin/bash/
-                  sleep 30
+                  sleep 10
                   terraform destroy --auto-approve
                   '''
               }

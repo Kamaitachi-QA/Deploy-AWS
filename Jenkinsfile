@@ -19,7 +19,7 @@ pipeline {
               steps{
                   sh ''' #!/bin/bash/
                   cd aws-terraform
-                  ansible-playbook -i inventory playbook-swarm.yaml --auto-approve
+                  ansible-playbook -i inventory playbook-swarm.yaml
                   sleep 30
                   terraform destroy
                   '''

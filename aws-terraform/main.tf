@@ -145,7 +145,7 @@ resource "aws_instance" "worker2" {
   ami                    = local.imageid
   instance_type          = local.instanceType
   key_name               = var.sshkeypairname
-  vpc_security_group_ids = [aws_security_group.SecGroup.id]
+  vpc_security_group_ids = [aws_security_group.SGroup.id]
   user_data              = <<EOF
 #cloud-config
 sources:

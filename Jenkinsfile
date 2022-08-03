@@ -19,7 +19,7 @@ pipeline {
           stage ('night night'){
               steps{
                   sh ''' #!/bin/bash/
-                  sleep 120
+                  sleep 60
                   '''
               }
           }

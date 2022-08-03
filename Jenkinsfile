@@ -30,18 +30,18 @@ pipeline {
           stage ('night night'){
               steps{
                   sh ''' #!/bin/bash/
-                  sleep 55
+                  sleep 60
                   '''
               }
           }
-           
+           try{
           stage ('ansible playbook - swarm deploy'){
               steps{
                   sh ''' #!/bin/bash/
                   cd aws-terraform
                   ansible-playbook -i inventory playbook-swarm.yaml
                   '''
-                  catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+              } catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh "exit 1"
                   }
               }

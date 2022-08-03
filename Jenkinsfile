@@ -10,6 +10,7 @@ pipeline {
             steps{
                 sh ''' #!/bin/bash/
                 cd aws-terraform
+                terraform destroy
                 terraform init
                 terraform plan
                 terraform apply --auto-approve

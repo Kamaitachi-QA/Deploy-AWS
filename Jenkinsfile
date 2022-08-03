@@ -15,5 +15,12 @@ pipeline {
                 '''
             }
         }
+          stage ('ansible playbook - swarm deploy'){
+              steps{
+                  sh ''' #!/bin/bash/
+                  ansible-playbook -i inventory playbook-swarm.yaml --auto-approve
+                  '''
+              }
+          }
     }
 }

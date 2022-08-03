@@ -14,6 +14,7 @@ pipeline {
                   terraform destroy --auto-approve
                   '''
               }
+             }
         stage ('manage configuration & deploy'){
             steps{
                 sh ''' #!/bin/bash/

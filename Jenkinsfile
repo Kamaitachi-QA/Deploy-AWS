@@ -10,7 +10,7 @@ pipeline {
             steps{
                 sh ''' #!/bin/bash/
                 cd aws-terraform
-                terraform destroy
+                terraform destroy --auto-approve
                 terraform init
                 terraform plan
                 terraform apply --auto-approve
@@ -29,7 +29,7 @@ pipeline {
               steps{
                   sh ''' #!/bin/bash/
                   sleep 30
-                  terraform destroy
+                  terraform destroy --auto-approve
                   '''
               }
           }

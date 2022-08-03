@@ -11,6 +11,7 @@
   become: true
   docker_swarm:
     state: present
+    #default_addr_poll: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}" 
   when: swarm_status.rc != 0
   tags: swarm
 
@@ -22,4 +23,4 @@
 - name: Get the worker join-token
   shell: docker swarm join-token --quiet worker
   register: worker_token
-  tags: swarm
+  tags: swarms

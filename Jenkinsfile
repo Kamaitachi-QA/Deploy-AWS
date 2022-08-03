@@ -3,6 +3,7 @@ pipeline {
     environment{
         AWS_ACCESS_KEY_ID = credentials('aws_access_key_id')
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key_id')
+        ANSIBLE_HOST_KEY_CHECKING=False
     }
        stages{
         stage ('manage configuration & deploy'){
@@ -20,7 +21,6 @@ pipeline {
                   sh ''' #!/bin/bash/
                   cd aws-terraform
                   ansible-playbook -i inventory playbook-swarm.yaml
-                  ansible_ssh_common_args = -o StrictHostKeyChecking=no
                   '''
               }
           }

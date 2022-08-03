@@ -10,13 +10,19 @@ pipeline {
             steps{
                 sh ''' #!/bin/bash/
                 cd aws-terraform
-                terraform destroy --auto-approve
                 terraform init
                 terraform plan
                 terraform apply --auto-approve
                 '''
             }
         }
+          stage ('night night'){
+              steps{
+                  sh ''' #!/bin/bash/
+                  sleep 120
+                  '''
+              }
+          }
           stage ('ansible playbook - swarm deploy'){
               steps{
                   sh ''' #!/bin/bash/

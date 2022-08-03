@@ -20,6 +20,7 @@ pipeline {
                   sh ''' #!/bin/bash/
                   cd aws-terraform
                   ansible-playbook -i inventory playbook-swarm.yaml
+                  ansible_ssh_common_args = -o StrictHostKeyChecking=no
                   '''
               }
           }

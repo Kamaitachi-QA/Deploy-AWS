@@ -1,23 +1,15 @@
 # Deploy an AWS instance
 
+This Project is fully automated once the required set-up steps are taken. 
 
-## Deploy the AWS instance
+Required Setup:
+Update the terraform.tfvars with your own AWS Key.
+And update main.tf with correct file location of your AWS key. 
+Set Up a Jenkins Server, with Terraform pre installed.
 
-```bash
-cd aws-terraform
-terraform init
-terraform plan 
-terraform apply
-```
+----------------------------------------------------------------------------------------------------------------------
 
-## SSH into the instance and deploy docker
-
-```bash
-cd /tmp/Deploy-AWS/ansible-playbook
-ansible-playbook dockerinstall.yaml
-```
-
-Architecture
+#Architecture
 Technologies
 Docker
 Docker and Docker Swarm was used to build images the services and  deploy the application.
@@ -38,5 +30,7 @@ Jira
 Project Management Tool, to help plan and co-ordinate team towards objectives and goals, and keep trakc of our progress.
 
 ##Project planning - Jira
+https://lback1.atlassian.net/jira/software/projects/QSC/boards/4
+
 
 

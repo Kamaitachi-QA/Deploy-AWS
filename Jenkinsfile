@@ -44,6 +44,12 @@ pipeline {
             }
           }
            
+          stage ('Jira Comment'){
+              steps{
+                     jiraComment body: 'test comment', issueKey: 'QSC-19'
+            }
+          }
+           
            stage ('Destroying it all!'){
               steps{
                   sh ''' #!/bin/bash/

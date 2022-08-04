@@ -47,7 +47,7 @@ pipeline {
            stage ('Destroying it all!'){
               steps{
                   sh ''' #!/bin/bash/
-                  sleep 10
+                  sleep 240
                   terraform destroy --auto-approve
                   '''
               }

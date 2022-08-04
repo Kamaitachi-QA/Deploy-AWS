@@ -30,7 +30,7 @@ pipeline {
           stage ('night night'){
               steps{
                   sh ''' #!/bin/bash/
-                  sleep 60
+                  sleep 90
                   '''
               }
           }
@@ -39,7 +39,6 @@ pipeline {
               steps{
                   sh ''' #!/bin/bash/
                   cd aws-terraform
-                  sudo chmod 666 /var/run/docker.sock
                   ansible-playbook -i inventory playbook-swarm.yaml
                   '''
             }

@@ -5,7 +5,7 @@
     remote_user: ec2-user
     tasks:
       - name: Swarm Init
-        command: docker swarm init --advertise-addr {{ inventory_hostname }}
+        command: sudo docker swarm init --advertise-addr {{ inventory_hostname }}
         retries: 10
         delay: 30
         register: result
@@ -33,7 +33,7 @@
       manager: "{{ hostvars[groups['manager'][0]]['inventory_hostname'] }}"
     tasks:
       - name: Join Swarm Cluster as a Worker
-        command: docker swarm join --token {{ token }} {{ manager }}:2377
+        command: sudo docker swarm join --token {{ token }} {{ manager }}:2377
         register: worker
 
       - name: Show Results

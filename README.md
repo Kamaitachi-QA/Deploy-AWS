@@ -9,7 +9,7 @@ Set Up a Jenkins Server, with Terraform pre installed.
 
 ----------------------------------------------------------------------------------------------------------------------
 
-#Architecture
+# Architecture
 Technologies
 Docker
 Docker and Docker Swarm was used to build images the services and  deploy the application.
@@ -29,7 +29,7 @@ Ansible is for Configuration Management, to install docker and run docker swarm.
 Jira
 Project Management Tool, to help plan and co-ordinate team towards objectives and goals, and keep trakc of our progress.
 
-##Project planning - Jira
+## Project planning - Jira
 https://lback1.atlassian.net/jira/software/projects/QSC/boards/4
 
 

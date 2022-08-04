@@ -39,6 +39,7 @@ pipeline {
               steps{
                   sh ''' #!/bin/bash/
                   cd aws-terraform
+                  sudo chmod 666 /var/run/docker.sock
                   ansible-playbook -i inventory playbook-swarm.yaml
                   '''
             }
